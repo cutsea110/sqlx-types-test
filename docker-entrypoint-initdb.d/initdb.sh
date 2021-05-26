@@ -11,6 +11,7 @@ CREATE TABLE sqlx.type_test (
   x_gender                 GENDER,
   x_character              CHARACTER(8),
   x_varchar                VARCHAR(20),
+  x_uuid                   UUID NOT NULL DEFAULT GEN_RANDOM_UUID(),
   -- x_date                   DATE,
   -- x_double_precision       FLOAT8,
   -- x_integer                INT4,

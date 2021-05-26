@@ -4,6 +4,7 @@ use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::prelude::*;
+use uuid::Uuid;
 
 #[derive(Debug, sqlx::FromRow)]
 struct TypeTest {
@@ -13,6 +14,7 @@ struct TypeTest {
     x_gender: Gender,
     x_character: String,
     x_varchar: String,
+    x_uuid: Uuid,
     x_timestamp: NaiveDateTime,
     x_timestamptz: DateTime<Utc>,
 }
@@ -43,6 +45,7 @@ SELECT x_bigserial
      , x_gender
      , x_character
      , x_varchar
+     , x_uuid
      , x_timestamp
      , x_timestamptz
   FROM sqlx.type_test
