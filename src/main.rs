@@ -2,7 +2,7 @@ use anyhow::Result;
 use chrono::naive::{NaiveDate, NaiveDateTime, NaiveTime};
 use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
-use sqlx::postgres::types::PgMoney;
+use sqlx::postgres::types::{PgMoney, PgTimeTz};
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::prelude::*;
 use uuid::Uuid;
@@ -24,6 +24,7 @@ struct TypeTest {
     x_uuid: Uuid,
     x_date: NaiveDate,
     x_time: NaiveTime,
+    x_timetz: PgTimeTz,
     x_timestamp: NaiveDateTime,
     x_timestamptz: DateTime<Utc>,
 }
@@ -63,6 +64,7 @@ SELECT x_bigserial
      , x_uuid
      , x_date
      , x_time
+     , x_timetz
      , x_timestamp
      , x_timestamptz
   FROM sqlx.type_test

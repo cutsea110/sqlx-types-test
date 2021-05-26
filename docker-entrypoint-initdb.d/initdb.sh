@@ -21,7 +21,7 @@ CREATE TABLE sqlx.type_test (
   -- x_numeric                NUMERIC(9,2),
   x_date                   DATE DEFAULT CURRENT_DATE,
   x_time                   TIME DEFAULT CURRENT_TIME,
-  -- x_timetz                 TIMETZ DEFAULT CURRENT_TIME,
+  x_timetz                 TIMETZ DEFAULT CURRENT_TIME,
   x_timestamp              TIMESTAMP DEFAULT NOW(),
   x_timestamptz            TIMESTAMPTZ DEFAULT NOW(),
 
