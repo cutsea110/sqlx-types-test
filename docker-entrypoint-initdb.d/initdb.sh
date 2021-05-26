@@ -16,6 +16,7 @@ CREATE TABLE sqlx.type_test (
   x_character              CHARACTER(8),
   x_varchar                VARCHAR(20),
   x_text                   TEXT,
+  x_bytea                  BYTEA,
   x_uuid                   UUID DEFAULT GEN_RANDOM_UUID(),
   -- x_numeric                NUMERIC(9,2),
   x_date                   DATE DEFAULT CURRENT_DATE,
@@ -39,6 +40,7 @@ INSERT INTO sqlx.type_test
   , x_character
   , x_varchar
   , x_text
+  , x_bytea
   ) VALUES
   ( 6174
   , 495
@@ -50,5 +52,6 @@ INSERT INTO sqlx.type_test
   , 'Hello'
   , 'World!'
   , 'Long long ago, There are a boy...'
+  , '🍣'
   );
 EOSQL

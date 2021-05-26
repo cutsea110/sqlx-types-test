@@ -20,6 +20,7 @@ struct TypeTest {
     x_character: String,
     x_varchar: String,
     x_text: String,
+    x_bytea: Vec<u8>,
     x_uuid: Uuid,
     x_date: NaiveDate,
     x_time: NaiveTime,
@@ -58,6 +59,7 @@ SELECT x_bigserial
      , x_character
      , x_varchar
      , x_text
+     , x_bytea
      , x_uuid
      , x_date
      , x_time
