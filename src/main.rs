@@ -20,6 +20,7 @@ struct TypeTest {
     x_real: f32,
     x_money: PgMoney,
     x_gender: Gender,
+    x_boolean: bool,
     x_bit: BitVec,
     x_varbit: BitVec,
     x_character: String,
@@ -63,6 +64,7 @@ SELECT x_bigserial
      , x_real
      , x_money
      , x_gender
+     , x_boolean
      , x_bit
      , x_varbit
      , x_character

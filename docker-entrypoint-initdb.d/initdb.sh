@@ -14,6 +14,7 @@ CREATE TABLE sqlx.type_test (
   x_real                   REAL, -- FLOAT4,
   x_money                  MONEY,
   x_gender                 GENDER,
+  x_boolean                BOOLEAN,
   x_bit                    bit(3),
   x_varbit                 varbit(20),
   x_character              CHARACTER(8),
@@ -40,6 +41,7 @@ INSERT INTO sqlx.type_test
   , x_real
   , x_money
   , x_gender
+  , x_boolean
   , x_bit
   , x_varbit
   , x_character
@@ -55,6 +57,7 @@ INSERT INTO sqlx.type_test
   , 1.2345
   , 12.34
   , 'female'
+  , 't'
   , b'101'
   , b'1010110'
   , 'Hello'
