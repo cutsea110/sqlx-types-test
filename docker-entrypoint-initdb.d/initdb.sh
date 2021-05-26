@@ -20,7 +20,7 @@ CREATE TABLE sqlx.type_test (
   -- x_text                   TEXT,
   -- x_time                   TIME,
   -- x_timetz                 TIMETZ,
-  -- x_timestamp              TIMESTAMP,
+  x_timestamp              TIMESTAMP NOT NULL DEFAULT NOW(),
   x_timestamptz            TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 
   PRIMARY KEY (x_bigserial)

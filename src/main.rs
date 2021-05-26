@@ -1,4 +1,5 @@
 use anyhow::Result;
+use chrono::naive::NaiveDateTime;
 use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
 use sqlx::postgres::{PgPool, PgPoolOptions};
@@ -12,6 +13,7 @@ struct TypeTest {
     x_gender: Gender,
     x_character: String,
     x_varchar: String,
+    x_timestamp: NaiveDateTime,
     x_timestamptz: DateTime<Utc>,
 }
 
@@ -41,6 +43,7 @@ SELECT x_bigserial
      , x_gender
      , x_character
      , x_varchar
+     , x_timestamp
      , x_timestamptz
   FROM sqlx.type_test
 "#,
