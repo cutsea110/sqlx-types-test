@@ -29,6 +29,7 @@ CREATE TABLE sqlx.type_test (
   x_timetz                 TIMETZ DEFAULT CURRENT_TIME,
   x_timestamp              TIMESTAMP DEFAULT NOW(),
   x_timestamptz            TIMESTAMPTZ DEFAULT NOW(),
+  x_interval               INTERVAL,
 
   PRIMARY KEY (x_bigserial)
 );
@@ -52,6 +53,7 @@ INSERT INTO sqlx.type_test
   , x_bytea
   , x_json
   , x_jsonb
+  , x_interval
   ) VALUES
   ( 6174
   , 495
@@ -70,5 +72,6 @@ INSERT INTO sqlx.type_test
   , '🍣'
   , json_object('{name, "cutsea110", age, 50, height, 176.0, weight, 72.95, sex, null, favorite, null}')
   , array_to_json('{{1,2,3},{4,5,6},{7,8,9}}'::int[])
+  , make_interval(months := 14)
   );
 EOSQL

@@ -5,7 +5,7 @@ use chrono::naive::{NaiveDate, NaiveDateTime, NaiveTime};
 use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
 use serde_json::Value;
-use sqlx::postgres::types::{PgMoney, PgTimeTz};
+use sqlx::postgres::types::{PgInterval, PgMoney, PgTimeTz};
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::prelude::*;
 use uuid::Uuid;
@@ -36,6 +36,7 @@ struct TypeTest {
     x_timetz: PgTimeTz,
     x_timestamp: NaiveDateTime,
     x_timestamptz: DateTime<Utc>,
+    x_interval: PgInterval,
 }
 
 #[derive(Debug, sqlx::Type)]
@@ -82,6 +83,7 @@ SELECT x_bigserial
      , x_timetz
      , x_timestamp
      , x_timestamptz
+     , x_interval
   FROM sqlx.type_test
 "#,
     )
