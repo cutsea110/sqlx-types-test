@@ -1,4 +1,5 @@
 use anyhow::Result;
+use bigdecimal::BigDecimal;
 use chrono::naive::{NaiveDate, NaiveDateTime, NaiveTime};
 use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
@@ -13,6 +14,7 @@ struct TypeTest {
     x_bigint: i64,
     x_integer: i32,
     x_smallint: i16,
+    x_numeric: BigDecimal,
     x_double_precision: f64,
     x_real: f32,
     x_money: PgMoney,
@@ -53,6 +55,7 @@ SELECT x_bigserial
      , x_bigint
      , x_integer
      , x_smallint
+     , x_numeric
      , x_double_precision
      , x_real
      , x_money

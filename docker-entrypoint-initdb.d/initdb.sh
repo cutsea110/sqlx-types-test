@@ -9,6 +9,7 @@ CREATE TABLE sqlx.type_test (
   x_bigint                 BIGINT, -- INT8
   x_integer                INT, -- INT4,
   x_smallint               SMALLINT, -- INT2
+  x_numeric                NUMERIC(9,2),
   x_double_precision       DOUBLE PRECISION, -- FLOAT8,
   x_real                   REAL, -- FLOAT4,
   x_money                  MONEY,
@@ -18,7 +19,6 @@ CREATE TABLE sqlx.type_test (
   x_text                   TEXT,
   x_bytea                  BYTEA,
   x_uuid                   UUID DEFAULT GEN_RANDOM_UUID(),
-  -- x_numeric                NUMERIC(9,2),
   x_date                   DATE DEFAULT CURRENT_DATE,
   x_time                   TIME DEFAULT CURRENT_TIME,
   x_timetz                 TIMETZ DEFAULT CURRENT_TIME,
@@ -33,6 +33,7 @@ INSERT INTO sqlx.type_test
   ( x_bigint
   , x_integer
   , x_smallint
+  , x_numeric
   , x_double_precision
   , x_real
   , x_money
@@ -45,6 +46,7 @@ INSERT INTO sqlx.type_test
   ( 6174
   , 495
   , 42
+  , 1234567.89
   , 1.23456789
   , 1.2345
   , 12.34
