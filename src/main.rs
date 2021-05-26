@@ -15,6 +15,7 @@ struct TypeTest {
     x_gender: Gender,
     x_character: String,
     x_varchar: String,
+    x_text: String,
     x_uuid: Uuid,
     x_date: NaiveDate,
     x_time: NaiveTime,
@@ -49,6 +50,7 @@ SELECT x_bigserial
      , x_gender
      , x_character
      , x_varchar
+     , x_text
      , x_uuid
      , x_date
      , x_time
