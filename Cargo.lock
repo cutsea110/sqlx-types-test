@@ -738,6 +738,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "ipnetwork"
+version = "0.17.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "02c3eaab3ac0ede60ffa41add21970a7df7d91772c03383aac6c2c3d53cc716b"
+
+[[package]]
+name = "ipnetwork"
+version = "0.18.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4088d739b183546b239688ddbc79891831df421773df95e236daf7867866d355"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "itoa"
 version = "0.4.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1339,6 +1354,7 @@ dependencies = [
  "hashlink",
  "hex",
  "hmac",
+ "ipnetwork 0.17.0",
  "itoa",
  "libc",
  "log",
@@ -1405,6 +1421,7 @@ dependencies = [
  "bit-vec",
  "chrono",
  "futures",
+ "ipnetwork 0.18.0",
  "serde_json",
  "sqlx",
  "uuid",

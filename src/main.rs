@@ -8,6 +8,7 @@ use serde_json::Value;
 use sqlx::postgres::types::{PgInterval, PgMoney, PgTimeTz};
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::prelude::*;
+use sqlx::types::ipnetwork::IpNetwork;
 use uuid::Uuid;
 
 #[derive(Debug, sqlx::FromRow)]
@@ -37,6 +38,10 @@ struct TypeTest {
     x_timestamp: NaiveDateTime,
     x_timestamptz: DateTime<Utc>,
     x_interval: PgInterval,
+    x_inet4: IpNetwork,
+    x_cidr4: IpNetwork,
+    x_inet6: IpNetwork,
+    x_cidr6: IpNetwork,
 }
 
 #[derive(Debug, sqlx::Type)]
@@ -84,6 +89,10 @@ SELECT x_bigserial
      , x_timestamp
      , x_timestamptz
      , x_interval
+     , x_inet4
+     , x_cidr4
+     , x_inet6
+     , x_cidr6
   FROM sqlx.type_test
 "#,
     )

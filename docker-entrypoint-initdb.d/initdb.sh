@@ -30,6 +30,10 @@ CREATE TABLE sqlx.type_test (
   x_timestamp              TIMESTAMP DEFAULT NOW(),
   x_timestamptz            TIMESTAMPTZ DEFAULT NOW(),
   x_interval               INTERVAL,
+  x_inet4                  INET,
+  x_cidr4                  CIDR,
+  x_inet6                  INET,
+  x_cidr6                  CIDR,
 
   PRIMARY KEY (x_bigserial)
 );
@@ -54,6 +58,10 @@ INSERT INTO sqlx.type_test
   , x_json
   , x_jsonb
   , x_interval
+  , x_inet4
+  , x_cidr4
+  , x_inet6
+  , x_cidr6
   ) VALUES
   ( 6174
   , 495
@@ -73,5 +81,9 @@ INSERT INTO sqlx.type_test
   , json_object('{name, "cutsea110", age, 50, height, 176.0, weight, 72.95, sex, null, favorite, null}')
   , array_to_json('{{1,2,3},{4,5,6},{7,8,9}}'::int[])
   , make_interval(months := 14)
+  , inet '192.168.0.0/24'
+  , cidr '192.168.0.0/24'
+  , inet '2001:db8:abcd:0012::0/64'
+  , cidr '2001:db8:abcd:0012::0/64'
   );
 EOSQL
