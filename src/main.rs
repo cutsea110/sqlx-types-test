@@ -1,5 +1,6 @@
 use anyhow::Result;
 use bigdecimal::BigDecimal;
+use bit_vec::BitVec;
 use chrono::naive::{NaiveDate, NaiveDateTime, NaiveTime};
 use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
@@ -19,6 +20,8 @@ struct TypeTest {
     x_real: f32,
     x_money: PgMoney,
     x_gender: Gender,
+    x_bit: BitVec,
+    x_varbit: BitVec,
     x_character: String,
     x_varchar: String,
     x_text: String,
@@ -60,6 +63,8 @@ SELECT x_bigserial
      , x_real
      , x_money
      , x_gender
+     , x_bit
+     , x_varbit
      , x_character
      , x_varchar
      , x_text
