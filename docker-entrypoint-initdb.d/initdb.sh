@@ -11,6 +11,7 @@ CREATE TABLE sqlx.type_test (
   x_smallint               SMALLINT, -- INT2
   x_double_precision       DOUBLE PRECISION, -- FLOAT8,
   x_real                   REAL, -- FLOAT4,
+  x_money                  MONEY,
   x_gender                 GENDER,
   x_character              CHARACTER(8),
   x_varchar                VARCHAR(20),
@@ -33,6 +34,7 @@ INSERT INTO sqlx.type_test
   , x_smallint
   , x_double_precision
   , x_real
+  , x_money
   , x_gender
   , x_character
   , x_varchar
@@ -43,6 +45,7 @@ INSERT INTO sqlx.type_test
   , 42
   , 1.23456789
   , 1.2345
+  , 12.34
   , 'female'
   , 'Hello'
   , 'World!'
