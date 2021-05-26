@@ -12,6 +12,8 @@ struct TypeTest {
     x_bigint: i64,
     x_integer: i32,
     x_smallint: i16,
+    x_double_precision: f64,
+    x_real: f32,
     x_gender: Gender,
     x_character: String,
     x_varchar: String,
@@ -47,6 +49,8 @@ SELECT x_bigserial
      , x_bigint
      , x_integer
      , x_smallint
+     , x_double_precision
+     , x_real
      , x_gender
      , x_character
      , x_varchar
