@@ -10,6 +10,7 @@ use uuid::Uuid;
 struct TypeTest {
     x_bigserial: i64,
     x_bigint: i64,
+    x_integer: i32,
     x_smallint: i16,
     x_gender: Gender,
     x_character: String,
@@ -43,6 +44,7 @@ async fn select(conn: &PgPool) -> Result<Vec<TypeTest>> {
         r#"
 SELECT x_bigserial
      , x_bigint
+     , x_integer
      , x_smallint
      , x_gender
      , x_character
