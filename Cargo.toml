@@ -1,0 +1,13 @@
+[package]
+name = "sqlx-types-test"
+version = "0.1.0"
+authors = ["cutsea110 <cutsea110@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sqlx = { varsion = "0.5.4", features = [ "postgres", "runtime-async-std-native-tls" ] }
+async-std = { version = "1.9", features = [ "attributes" ] }
+futures = "0.3.15"
+anyhow = "1.0.40"
