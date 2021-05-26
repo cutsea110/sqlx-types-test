@@ -1,4 +1,5 @@
 use anyhow::Result;
+use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::prelude::*;
@@ -11,6 +12,7 @@ struct TypeTest {
     x_gender: Gender,
     x_character: String,
     x_varchar: String,
+    x_timestamptz: DateTime<Utc>,
 }
 
 #[derive(Debug, sqlx::Type)]
@@ -39,6 +41,7 @@ SELECT x_bigserial
      , x_gender
      , x_character
      , x_varchar
+     , x_timestamptz
   FROM sqlx.type_test
 "#,
     )
@@ -58,7 +61,7 @@ async fn main() -> Result<()> {
 
     let rows = select(&conn).await?;
     for row in rows {
-        println!("{:?}", row);
+        println!("{:#?}", row);
     }
 
     Ok(())
