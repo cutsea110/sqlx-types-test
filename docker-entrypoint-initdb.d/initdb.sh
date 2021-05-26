@@ -22,6 +22,8 @@ CREATE TABLE sqlx.type_test (
   x_text                   TEXT,
   x_bytea                  BYTEA,
   x_uuid                   UUID DEFAULT GEN_RANDOM_UUID(),
+  x_json                   JSON,
+  x_jsonb                  JSONB,
   x_date                   DATE DEFAULT CURRENT_DATE,
   x_time                   TIME DEFAULT CURRENT_TIME,
   x_timetz                 TIMETZ DEFAULT CURRENT_TIME,
@@ -48,6 +50,8 @@ INSERT INTO sqlx.type_test
   , x_varchar
   , x_text
   , x_bytea
+  , x_json
+  , x_jsonb
   ) VALUES
   ( 6174
   , 495
@@ -64,5 +68,7 @@ INSERT INTO sqlx.type_test
   , 'World!'
   , 'Long long ago, There are a boy...'
   , '🍣'
+  , json_object('{name, "cutsea110", age, 50, height, 176.0, weight, 72.95, sex, null, favorite, null}')
+  , array_to_json('{{1,2,3},{4,5,6},{7,8,9}}'::int[])
   );
 EOSQL

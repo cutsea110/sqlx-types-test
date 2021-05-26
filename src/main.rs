@@ -4,6 +4,7 @@ use bit_vec::BitVec;
 use chrono::naive::{NaiveDate, NaiveDateTime, NaiveTime};
 use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
+use serde_json::Value;
 use sqlx::postgres::types::{PgMoney, PgTimeTz};
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::prelude::*;
@@ -28,6 +29,8 @@ struct TypeTest {
     x_text: String,
     x_bytea: Vec<u8>,
     x_uuid: Uuid,
+    x_json: Value,
+    x_jsonb: Value,
     x_date: NaiveDate,
     x_time: NaiveTime,
     x_timetz: PgTimeTz,
@@ -72,6 +75,8 @@ SELECT x_bigserial
      , x_text
      , x_bytea
      , x_uuid
+     , x_json
+     , x_jsonb
      , x_date
      , x_time
      , x_timetz
