@@ -37,10 +37,10 @@ struct TypeTest {
     x_text: String,
     x_bytea: Vec<u8>,
     x_uuid: Uuid,
-    x_json: Json<User>,
-    x_raw_json: JsonValue,
-    x_jsonb: Json<Vec<Vec<i32>>>,
-    x_raw_jsonb: JsonValue,
+    x_json_typ: Json<User>,
+    x_json_val: JsonValue,
+    x_jsonb_typ: Json<Vec<Vec<i32>>>,
+    x_jsonb_val: JsonValue,
     x_date: NaiveDate,
     x_time: NaiveTime,
     x_timetz: PgTimeTz,
@@ -90,10 +90,10 @@ SELECT x_bigserial
      , x_text
      , x_bytea
      , x_uuid
-     , x_json
-     , x_raw_json
-     , x_jsonb
-     , x_raw_jsonb
+     , x_json_typ
+     , x_json_val
+     , x_jsonb_typ
+     , x_jsonb_val
      , x_date
      , x_time
      , x_timetz

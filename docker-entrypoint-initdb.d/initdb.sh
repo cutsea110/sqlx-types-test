@@ -22,10 +22,10 @@ CREATE TABLE sqlx.type_test (
   x_text                   TEXT,
   x_bytea                  BYTEA,
   x_uuid                   UUID DEFAULT GEN_RANDOM_UUID(),
-  x_json                   JSON,
-  x_raw_json               JSON,
-  x_jsonb                  JSONB,
-  x_raw_jsonb              JSONB,
+  x_json_typ               JSON,
+  x_json_val               JSON,
+  x_jsonb_typ              JSONB,
+  x_jsonb_val              JSONB,
   x_date                   DATE DEFAULT CURRENT_DATE,
   x_time                   TIME DEFAULT CURRENT_TIME,
   x_timetz                 TIMETZ DEFAULT CURRENT_TIME,
@@ -57,10 +57,10 @@ INSERT INTO sqlx.type_test
   , x_varchar
   , x_text
   , x_bytea
-  , x_json
-  , x_raw_json
-  , x_jsonb
-  , x_raw_jsonb
+  , x_json_typ
+  , x_json_val
+  , x_jsonb_typ
+  , x_jsonb_val
   , x_interval
   , x_inet4
   , x_cidr4
