@@ -1,15 +1,22 @@
 use anyhow::Result;
-use bigdecimal::BigDecimal;
-use bit_vec::BitVec;
 use chrono::naive::{NaiveDate, NaiveDateTime, NaiveTime};
 use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
-use serde_json::Value;
+use serde::{Deserialize, Serialize};
+use serde_json::Value as JsonValue;
 use sqlx::postgres::types::{PgInterval, PgMoney, PgTimeTz};
 use sqlx::postgres::{PgPool, PgPoolOptions};
-use sqlx::prelude::*;
-use sqlx::types::ipnetwork::IpNetwork;
-use uuid::Uuid;
+use sqlx::types::{ipnetwork::IpNetwork, BigDecimal, BitVec, Json, Uuid};
+
+#[derive(Debug, sqlx::FromRow, Serialize, Deserialize)]
+struct User {
+    name: String,
+    age: i16,
+    height: f32,
+    weight: f32,
+    gender: Option<Gender>,
+    favorite: Option<String>,
+}
 
 #[derive(Debug, sqlx::FromRow)]
 struct TypeTest {
@@ -30,8 +37,10 @@ struct TypeTest {
     x_text: String,
     x_bytea: Vec<u8>,
     x_uuid: Uuid,
-    x_json: Value,
-    x_jsonb: Value,
+    x_json: Json<User>,
+    x_raw_json: JsonValue,
+    x_jsonb: Json<Vec<Vec<i32>>>,
+    x_raw_jsonb: JsonValue,
     x_date: NaiveDate,
     x_time: NaiveTime,
     x_timetz: PgTimeTz,
@@ -44,7 +53,7 @@ struct TypeTest {
     x_cidr6: IpNetwork,
 }
 
-#[derive(Debug, sqlx::Type)]
+#[derive(Debug, sqlx::Type, Serialize, Deserialize)]
 #[sqlx(rename_all = "lowercase")]
 enum Gender {
     Male,
@@ -82,7 +91,9 @@ SELECT x_bigserial
      , x_bytea
      , x_uuid
      , x_json
+     , x_raw_json
      , x_jsonb
+     , x_raw_jsonb
      , x_date
      , x_time
      , x_timetz

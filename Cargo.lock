@@ -1422,6 +1422,7 @@ dependencies = [
  "chrono",
  "futures",
  "ipnetwork 0.18.0",
+ "serde",
  "serde_json",
  "sqlx",
  "uuid",
