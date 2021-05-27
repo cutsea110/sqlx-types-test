@@ -282,6 +282,27 @@ RETURNING *
     Ok(row)
 }
 
+async fn delete_others(conn: &PgPool) -> Result<()> {
+    sqlx::query(
+        r#"
+DELETE FROM sqlx.type_test
+ WHERE x_bigserial <> (SELECT min(x_bigserial) FROM sqlx.type_test)
+"#,
+    )
+    .execute(conn)
+    .await?;
+
+    Ok(())
+}
+
+async fn count(conn: &PgPool) -> Result<i64> {
+    let c: (i64,) = sqlx::query_as("SELECT COUNT(*) FROM sqlx.type_test")
+        .fetch_one(conn)
+        .await?;
+
+    Ok(c.0)
+}
+
 #[async_std::main]
 async fn main() -> Result<()> {
     let conn = new("postgres://admin:admin@localhost:15432/sampledb").await?;
@@ -292,6 +313,11 @@ async fn main() -> Result<()> {
         let row = insert(&conn, row).await?;
         println!("{:#?}", row);
     }
+
+    delete_others(&conn).await?;
+
+    let c = count(&conn).await?;
+    println!("COUNT: {:?}", c);
 
     Ok(())
 }
