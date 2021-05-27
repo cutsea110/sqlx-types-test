@@ -4,7 +4,7 @@ use chrono::{DateTime, Utc};
 use futures::TryStreamExt; // try_next()
 use serde::{Deserialize, Serialize};
 use serde_json::Value as JsonValue;
-use sqlx::postgres::types::{PgInterval, PgMoney, PgTimeTz};
+use sqlx::postgres::types::{PgInterval, PgMoney, PgRange, PgTimeTz};
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::types::{ipnetwork::IpNetwork, BigDecimal, BitVec, Json, Uuid};
 
@@ -53,6 +53,12 @@ struct TypeTest {
     x_cidr4: IpNetwork,
     x_inet6: IpNetwork,
     x_cidr6: IpNetwork,
+    x_int4range: PgRange<i32>,
+    x_int8range: PgRange<i64>,
+    x_numrange: PgRange<BigDecimal>,
+    x_tsrange: PgRange<NaiveDateTime>,
+    x_tstzrange: PgRange<DateTime<Utc>>,
+    x_daterange: PgRange<NaiveDate>,
 }
 
 // Serialize, Deserialize は Json でも使われているので必要
@@ -122,6 +128,12 @@ SELECT x_bigserial
      , x_cidr4
      , x_inet6
      , x_cidr6
+     , x_int4range
+     , x_int8range
+     , x_numrange
+     , x_tsrange
+     , x_tstzrange
+     , x_daterange
   FROM sqlx.type_test
 "#,
     )

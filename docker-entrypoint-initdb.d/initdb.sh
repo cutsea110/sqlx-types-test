@@ -37,6 +37,13 @@ CREATE TABLE sqlx.type_test (
   x_cidr4                  CIDR,
   x_inet6                  INET,
   x_cidr6                  CIDR,
+  x_int4range              INT4RANGE,
+  x_int8range              INT8RANGE,
+  x_numrange               NUMRANGE,
+  x_tsrange                TSRANGE,
+  x_tstzrange              TSTZRANGE,
+  x_daterange              DATERANGE,
+
 
   PRIMARY KEY (x_bigserial)
 );
@@ -68,6 +75,12 @@ INSERT INTO sqlx.type_test
   , x_cidr4
   , x_inet6
   , x_cidr6
+  , x_int4range
+  , x_int8range
+  , x_numrange
+  , x_tsrange
+  , x_tstzrange
+  , x_daterange
   ) VALUES
   ( 6174
   , 495
@@ -94,5 +107,11 @@ INSERT INTO sqlx.type_test
   , cidr '192.168.0.0/24'
   , inet '2001:db8:abcd:0012::0/64'
   , cidr '2001:db8:abcd:0012::0/64'
+  , '[0,18)'
+  , '[18,)'
+  , '(0,42]'
+  , '[2021-05-26 14:30, 2021-05-26 16:30)'
+  , '[2021-05-26 00:00,)'
+  , '[2021-01-01, 2021-12-31]'
   );
 EOSQL
