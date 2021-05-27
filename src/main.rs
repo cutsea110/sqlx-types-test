@@ -25,8 +25,8 @@ struct TypeTestId(i64);
 
 #[derive(Debug, sqlx::FromRow)]
 struct TypeTest {
-    x_bigserial: TypeTestId, // New Type
-    x_bigint: i64,
+    x_bigserial: i64,
+    x_bigint: TypeTestId, // New Type
     x_integer: i32,
     x_smallint: i16,
     x_numeric: BigDecimal,
