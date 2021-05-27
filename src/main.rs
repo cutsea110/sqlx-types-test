@@ -8,6 +8,7 @@ use sqlx::postgres::types::{PgInterval, PgMoney, PgTimeTz};
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::types::{ipnetwork::IpNetwork, BigDecimal, BitVec, Json, Uuid};
 
+// Serialize, Deserialize は Json で扱うので必要になる
 #[derive(Debug, sqlx::FromRow, Serialize, Deserialize)]
 struct User {
     name: String,
@@ -29,6 +30,7 @@ struct TypeTest {
     x_real: f32,
     x_money: PgMoney,
     x_gender: Gender,
+    x_weekday: WeekDay,
     x_boolean: bool,
     x_bit: BitVec,
     x_varbit: BitVec,
@@ -53,12 +55,27 @@ struct TypeTest {
     x_cidr6: IpNetwork,
 }
 
+// Serialize, Deserialize は Json でも使われているので必要
+// User が Json になっていて、この型を含んでいるため
 #[derive(Debug, sqlx::Type, Serialize, Deserialize)]
+#[sqlx(type_name = "gender")] // for postgres only
 #[sqlx(rename_all = "lowercase")]
 enum Gender {
     Male,
     Female,
     Other,
+}
+
+#[derive(Debug, sqlx::Type)]
+#[repr(i32)]
+enum WeekDay {
+    Sunday = 0,
+    Monday = 1,
+    Tuesday = 2,
+    Wednesday = 3,
+    Thursday = 4,
+    Friday = 5,
+    Saturday = 6,
 }
 
 async fn new(conn_str: &str) -> Result<PgPool> {
@@ -82,6 +99,7 @@ SELECT x_bigserial
      , x_real
      , x_money
      , x_gender
+     , x_weekday
      , x_boolean
      , x_bit
      , x_varbit
