@@ -33,8 +33,8 @@ struct TypeTest {
     x_double_precision: f64,
     x_real: f32,
     x_money: PgMoney,
-    x_gender: Gender,   // strong enum
-    x_weekday: WeekDay, // weak enum
+    x_gender: Gender,   // Strong Enum
+    x_weekday: WeekDay, // Weak Enum
     x_boolean: bool,
     x_bit: BitVec,
     x_varbit: BitVec,
