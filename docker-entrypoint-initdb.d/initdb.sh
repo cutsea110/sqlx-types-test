@@ -7,6 +7,7 @@ CREATE TYPE gender AS ENUM ('male', 'female', 'other');
 CREATE TABLE sqlx.type_test (
   x_bigserial              BIGSERIAL,
   x_bigint                 BIGINT, -- INT8
+  x_newtype                BIGINT,
   x_integer                INT, -- INT4,
   x_smallint               SMALLINT, -- INT2
   x_numeric                NUMERIC(9,2),
@@ -51,6 +52,7 @@ CREATE TABLE sqlx.type_test (
 -- SAMPLE DATA
 INSERT INTO sqlx.type_test
   ( x_bigint
+  , x_newtype
   , x_integer
   , x_smallint
   , x_numeric
@@ -83,6 +85,7 @@ INSERT INTO sqlx.type_test
   , x_daterange
   ) VALUES
   ( 6174
+  , 123456789
   , 495
   , 42
   , 1234567.89

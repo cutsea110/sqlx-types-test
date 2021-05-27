@@ -26,7 +26,8 @@ struct TypeTestId(i64);
 #[derive(Debug, sqlx::FromRow)]
 struct TypeTest {
     x_bigserial: i64,
-    x_bigint: TypeTestId, // New Type
+    x_bigint: i64,
+    x_newtype: TypeTestId, // New Type
     x_integer: i32,
     x_smallint: i16,
     x_numeric: BigDecimal,
@@ -102,6 +103,7 @@ async fn select(conn: &PgPool) -> Result<Vec<TypeTest>> {
         r#"
 SELECT x_bigserial
      , x_bigint
+     , x_newtype
      , x_integer
      , x_smallint
      , x_numeric
@@ -151,12 +153,143 @@ SELECT x_bigserial
     Ok(ret)
 }
 
+async fn insert(conn: &PgPool, v: TypeTest) -> Result<TypeTest> {
+    let row = sqlx::query_as::<_, TypeTest>(
+        r#"
+INSERT INTO sqlx.type_test
+  ( x_bigint
+  , x_newtype
+  , x_integer
+  , x_smallint
+  , x_numeric
+  , x_double_precision
+  , x_real
+  , x_money
+  , x_gender
+  , x_weekday
+  , x_boolean
+  , x_bit
+  , x_varbit
+  , x_character
+  , x_varchar
+  , x_text
+  , x_bytea
+  , x_uuid
+  , x_json_typ
+  , x_json_val
+  , x_jsonb_typ
+  , x_jsonb_val
+  , x_date
+  , x_time
+  , x_timetz
+  , x_timestamp
+  , x_timestamptz
+  , x_interval
+  , x_inet4
+  , x_cidr4
+  , x_inet6
+  , x_cidr6
+  , x_int4range
+  , x_int8range
+  , x_numrange
+  , x_tsrange
+  , x_tstzrange
+  , x_daterange
+  ) VALUES
+  ( $1
+  , $2
+  , $3
+  , $4
+  , $5
+  , $6
+  , $7
+  , $8
+  , $9
+  , $10
+  , $11
+  , $12
+  , $13
+  , $14
+  , $15
+  , $16
+  , $17
+  , $18
+  , $19
+  , $20
+  , $21
+  , $22
+  , $23
+  , $24
+  , $25
+  , $26
+  , $27
+  , $28
+  , $29
+  , $30
+  , $31
+  , $32
+  , $33
+  , $34
+  , $35
+  , $36
+  , $37
+  , $38
+  )
+RETURNING *
+"#,
+    )
+    .bind(v.x_bigint)
+    .bind(v.x_newtype)
+    .bind(v.x_integer)
+    .bind(v.x_smallint)
+    .bind(v.x_numeric)
+    .bind(v.x_double_precision)
+    .bind(v.x_real)
+    .bind(v.x_money)
+    .bind(v.x_gender)
+    .bind(v.x_weekday)
+    .bind(v.x_boolean)
+    .bind(v.x_bit)
+    .bind(v.x_varbit)
+    .bind(v.x_character)
+    .bind(v.x_varchar)
+    .bind(v.x_text)
+    .bind(v.x_bytea)
+    .bind(v.x_uuid)
+    .bind(v.x_json_typ)
+    .bind(v.x_json_val)
+    .bind(v.x_jsonb_typ)
+    .bind(v.x_jsonb_val)
+    .bind(v.x_date)
+    .bind(v.x_time)
+    .bind(v.x_timetz)
+    .bind(v.x_timestamp)
+    .bind(v.x_timestamptz)
+    .bind(v.x_interval)
+    .bind(v.x_inet4)
+    .bind(v.x_cidr4)
+    .bind(v.x_inet6)
+    .bind(v.x_cidr6)
+    .bind(v.x_int4range)
+    .bind(v.x_int8range)
+    .bind(v.x_numrange)
+    .bind(v.x_tsrange)
+    .bind(v.x_tstzrange)
+    .bind(v.x_daterange)
+    .fetch_one(conn)
+    .await?;
+
+    Ok(row)
+}
+
 #[async_std::main]
 async fn main() -> Result<()> {
     let conn = new("postgres://admin:admin@localhost:15432/sampledb").await?;
 
     let rows = select(&conn).await?;
     for row in rows {
+        println!("{:#?}", row);
+        let row = insert(&conn, row).await?;
         println!("{:#?}", row);
     }
 
