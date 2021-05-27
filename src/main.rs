@@ -19,9 +19,13 @@ struct User {
     favorite: Option<String>,
 }
 
+#[derive(Debug, sqlx::Type)]
+#[sqlx(transparent)]
+struct TypeTestId(i64);
+
 #[derive(Debug, sqlx::FromRow)]
 struct TypeTest {
-    x_bigserial: i64,
+    x_bigserial: TypeTestId, // New Type
     x_bigint: i64,
     x_integer: i32,
     x_smallint: i16,
@@ -29,8 +33,8 @@ struct TypeTest {
     x_double_precision: f64,
     x_real: f32,
     x_money: PgMoney,
-    x_gender: Gender,
-    x_weekday: WeekDay,
+    x_gender: Gender,   // strong enum
+    x_weekday: WeekDay, // weak enum
     x_boolean: bool,
     x_bit: BitVec,
     x_varbit: BitVec,
