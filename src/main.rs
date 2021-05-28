@@ -8,6 +8,10 @@ use sqlx::postgres::types::{PgInterval, PgMoney, PgRange, PgTimeTz};
 use sqlx::postgres::{PgPool, PgPoolOptions};
 use sqlx::types::{ipnetwork::IpNetwork, BigDecimal, BitVec, Json, Uuid};
 
+// custom range type
+mod timerange;
+use timerange::*;
+
 // Serialize, Deserialize は Json で扱うので必要になる
 #[derive(Debug, sqlx::FromRow, Serialize, Deserialize)]
 struct User {
@@ -64,6 +68,7 @@ struct TypeTest {
     x_tsrange: PgRange<NaiveDateTime>,
     x_tstzrange: PgRange<DateTime<Utc>>,
     x_daterange: PgRange<NaiveDate>,
+    x_timerange: PgTimeRange, // Custom Range
 }
 
 // Serialize, Deserialize は Json でも使われているので必要
@@ -140,6 +145,7 @@ SELECT x_bigserial
      , x_tsrange
      , x_tstzrange
      , x_daterange
+     , x_timerange
   FROM sqlx.type_test
 "#,
     )
@@ -195,6 +201,7 @@ INSERT INTO sqlx.type_test
   , x_tsrange
   , x_tstzrange
   , x_daterange
+  , x_timerange
   ) VALUES
   ( $1
   , $2
@@ -234,6 +241,7 @@ INSERT INTO sqlx.type_test
   , $36
   , $37
   , $38
+  , $39
   )
 RETURNING *
 "#,
@@ -276,6 +284,7 @@ RETURNING *
     .bind(v.x_tsrange)
     .bind(v.x_tstzrange)
     .bind(v.x_daterange)
+    .bind(v.x_timerange)
     .fetch_one(conn)
     .await?;
 

@@ -4,6 +4,19 @@ CREATE SCHEMA sqlx;
 
 CREATE TYPE gender AS ENUM ('male', 'female', 'other');
 
+--
+-- ref.) https://www.postgresql.org/docs/13/rangetypes.html
+-- implement timerange on postgresql
+--
+CREATE FUNCTION time_subtype_diff(x time, y time) RETURNS float8 AS
+'SELECT EXTRACT(EPOCH FROM (x - y))' LANGUAGE sql STRICT IMMUTABLE;
+
+CREATE TYPE timerange AS RANGE (
+    subtype = time,
+    subtype_diff = time_subtype_diff
+);
+
+
 CREATE TABLE sqlx.type_test (
   x_bigserial              BIGSERIAL,
   x_bigint                 BIGINT, -- INT8
@@ -44,6 +57,7 @@ CREATE TABLE sqlx.type_test (
   x_tsrange                TSRANGE,
   x_tstzrange              TSTZRANGE,
   x_daterange              DATERANGE,
+  x_timerange              TIMERANGE, -- custom range
 
 
   PRIMARY KEY (x_bigserial)
@@ -83,6 +97,7 @@ INSERT INTO sqlx.type_test
   , x_tsrange
   , x_tstzrange
   , x_daterange
+  , x_timerange
   ) VALUES
   ( 6174
   , 123456789
@@ -116,5 +131,7 @@ INSERT INTO sqlx.type_test
   , '[2021-05-26 14:30, 2021-05-26 16:30)'
   , '[2021-05-26 00:00,)'
   , '[2021-01-01, 2021-12-31]'
+  , '[13:00, 18:45)'
   );
+
 EOSQL
